@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<link rel="stylesheet" href="light.css">
+
+<body>
+  <div id="light">
+  </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  <button  class="stop" type="button" name="button">RED</button><br>
+  <button class="warning" type="button" name="button">ORANGE</button>
+  <button class="go" type="button" name="button">GREEN</button>
+  <button  class="blink" type="button" name="button">BLINK</button><br>
+  <button  class="stopAll" type="button" name="button">STOP</button><br>
+
+
+</body>
+
+
+<script type="text/javascript">
+  var Light = function(id, color) {
+
+    var elem = document.getElementById(id);
+    elem.classList.add('light-background');
+
+
+    //append a div into the target element
+    var lightElem = document.createElement('div');
+    lightElem.classList.add('light');
+    lightElem.classList.add(color);
+    elem.appendChild(lightElem);
+
+
+    this.on = function() {
+      lightElem.classList.add('on');
+    };
+    this.off = function() {
+      lightElem.classList.remove('on');
+    };
+    this.blink = function() {
+      var myBlink = setInterval(function() {
+      lightElem.classList.toggle('on');
+    }, 1000);
+    this.blinkOff = function(){
+      clearInterval(myBlink);
+    }
+    }
+
+
+
+
+  }
+
+  var redLight = new Light('light', 'red');
+  var onBtn = document.querySelector('.stop');
+  onBtn.addEventListener('click', function(){
+    // switch the light on/off
+
+
+      redLight.on();
+      orangeLight.off();
+      greenLight.off();
+  });
+
+
+  var orangeLight = new Light('light', 'orange');
+  var onBtn = document.querySelector('.warning');
+
+  onBtn.addEventListener('click', function(){
+      // switch the light on/off
+      orangeLight.on();
+      redLight.off();
+      greenLight.off();
+  });
+
+
+
+var greenLight = new Light('light', 'green');
+var onBtn = document.querySelector('.go');
+onBtn.addEventListener('click', function(){
+    // switch the light on/off
+    greenLight.on();
+    orangeLight.off();
+    redLight.off();
+});
+
+var blinkBtn = document.querySelector('.blink');
+blinkBtn.addEventListener('click', function(){
+  greenLight.off();
+  orangeLight.off();
+  redLight.off();
+
+  greenLight.blink();
+  orangeLight.blink();
+  redLight.blink();
+
+});
+
+var stopBtn = document.querySelector('.stopAll');
+stopBtn.addEventListener('click', function(){
+  greenLight.blinkOff();
+  orangeLight.blinkOff();
+  redLight.blinkOff();
+  greenLight.off();
+  orangeLight.off();
+  redLight.off();
+});
+
+
+
+
+
+
+
+</script>
+</html>
+<!-- clearInterval(myBlink); -->
